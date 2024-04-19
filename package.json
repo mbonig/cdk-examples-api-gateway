@@ -24,11 +24,12 @@
     "projen": "npx projen"
   },
   "devDependencies": {
+    "@aws-lite/dynamodb-types": "^0.3.6",
     "@types/jest": "^29.5.12",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
-    "aws-cdk": "^2.1.0",
+    "aws-cdk": "^2.134.0",
     "esbuild": "^0.20.2",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -37,11 +38,15 @@
     "jest-junit": "^15",
     "projen": "^0.80.15",
     "ts-jest": "^29.1.2",
+    "ts-jest-mocker": "^1.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "@aws-lite/client": "^0.20.0",
+    "@aws-lite/dynamodb": "^0.3.4",
+    "@types/aws-lambda": "^8.10.136",
+    "aws-cdk-lib": "^2.134.0",
     "constructs": "^10.0.5"
   },
   "license": "Apache-2.0",

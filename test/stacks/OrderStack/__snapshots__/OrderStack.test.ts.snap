@@ -1,0 +1,911 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AWSCDKTriggerCustomResourceProviderCustomResourceProviderHandler97BECD91": {
+      "DependsOn": [
+        "AWSCDKTriggerCustomResourceProviderCustomResourceProviderRoleE18FAF0A",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "9b642d28372ac0688d94d58f71770ceba997be43db88ea4b1cd0081a3ac5231e.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "AWSCDKTriggerCustomResourceProviderCustomResourceProviderRoleE18FAF0A",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWSCDKTriggerCustomResourceProviderCustomResourceProviderRoleE18FAF0A": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "lambda:InvokeFunction",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": [
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Fn::GetAtt": [
+                              "TestsGetOrderTest88AC940D",
+                              "Arn",
+                            ],
+                          },
+                          ":*",
+                        ],
+                      ],
+                    },
+                  ],
+                },
+                {
+                  "Action": [
+                    "lambda:InvokeFunction",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": [
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Fn::GetAtt": [
+                              "TestsPostOrderTestEB3C878D",
+                              "Arn",
+                            ],
+                          },
+                          ":*",
+                        ],
+                      ],
+                    },
+                  ],
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GetOrderHandler4576A72C": {
+      "DependsOn": [
+        "GetOrderHandlerServiceRoleDefaultPolicy56174588",
+        "GetOrderHandlerServiceRoleCBF11364",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-bucket",
+          "S3Key": "my-key",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "INDEX_NAME": "orders",
+            "TABLE_NAME": {
+              "Fn::ImportValue": "Api:ExportsOutputRefMyTable794EDED1558A264E",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "GetOrderHandlerServiceRoleCBF11364",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs16.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "GetOrderHandlerServiceRoleCBF11364": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GetOrderHandlerServiceRoleDefaultPolicy56174588": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::ImportValue": "Api:ExportsOutputFnGetAttMyTable794EDED1ArnDFAD2254",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetOrderHandlerServiceRoleDefaultPolicy56174588",
+        "Roles": [
+          {
+            "Ref": "GetOrderHandlerServiceRoleCBF11364",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "PostOrderHandlerE150467D": {
+      "DependsOn": [
+        "PostOrderHandlerServiceRoleDefaultPolicy0083823D",
+        "PostOrderHandlerServiceRole9A777913",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-bucket",
+          "S3Key": "my-key",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "INDEX_NAME": "orders",
+            "TABLE_NAME": {
+              "Fn::ImportValue": "Api:ExportsOutputRefMyTable794EDED1558A264E",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "PostOrderHandlerServiceRole9A777913",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs16.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "PostOrderHandlerServiceRole9A777913": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "PostOrderHandlerServiceRoleDefaultPolicy0083823D": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::ImportValue": "Api:ExportsOutputFnGetAttMyTable794EDED1ArnDFAD2254",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "PostOrderHandlerServiceRoleDefaultPolicy0083823D",
+        "Roles": [
+          {
+            "Ref": "PostOrderHandlerServiceRole9A777913",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "RestApiorder8B1A6481": {
+      "Properties": {
+        "ParentId": {
+          "Fn::ImportValue": "Api:ExportsOutputFnGetAttMyRestApi2D1F47A9RootResourceIdA8A99F67",
+        },
+        "PathPart": "order",
+        "RestApiId": {
+          "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "RestApiorderGETApiPermissionTesttestRestApi41EB688DGETorder6A2A42AE": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetOrderHandler4576A72C",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+              },
+              "/test-invoke-stage/GET/order",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "RestApiorderGETApiPermissiontestRestApi41EB688DGETorder843CE060": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetOrderHandler4576A72C",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+              },
+              "/*/GET/order",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "RestApiorderGETE90D3FAE": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetOrderHandler4576A72C",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "RestApiorder8B1A6481",
+        },
+        "RestApiId": {
+          "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "RestApiorderPOST6B9C6E9D": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PostOrderHandlerE150467D",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "RestApiorder8B1A6481",
+        },
+        "RestApiId": {
+          "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "RestApiorderPOSTApiPermissionTesttestRestApi41EB688DPOSTorderC5FC9D25": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PostOrderHandlerE150467D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+              },
+              "/test-invoke-stage/POST/order",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "RestApiorderPOSTApiPermissiontestRestApi41EB688DPOSTorder4D010E41": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PostOrderHandlerE150467D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+              },
+              "/*/POST/order",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "RestApiorderidD816925B": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "RestApiorder8B1A6481",
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "RestApiorderidGETApiPermissionTesttestRestApi41EB688DGETorderid3351AEDB": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetOrderHandler4576A72C",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+              },
+              "/test-invoke-stage/GET/order/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "RestApiorderidGETApiPermissiontestRestApi41EB688DGETorderid4CDAC4AB": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetOrderHandler4576A72C",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+              },
+              "/*/GET/order/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "RestApiorderidGETF268739C": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetOrderHandler4576A72C",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "RestApiorderidD816925B",
+        },
+        "RestApiId": {
+          "Fn::ImportValue": "Api:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "TestsGetOrderTest88AC940D": {
+      "DependsOn": [
+        "TestsGetOrderTestServiceRoleDFB27BF0",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-bucket",
+          "S3Key": "my-key",
+        },
+        "Environment": {
+          "Variables": {
+            "API_ENDPOINT": "https://api.example.matthewbonig.com/v1/order/",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "TestsGetOrderTestServiceRoleDFB27BF0",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "TestsGetOrderTestCurrentVersion2705E2D1c5f2213f45730c0d6e64049522f9d2f3": {
+      "Properties": {
+        "FunctionName": {
+          "Ref": "TestsGetOrderTest88AC940D",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "TestsGetOrderTestServiceRoleDFB27BF0": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "TestsGetOrderTestTrigger2B9067E4": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ExecuteOnHandlerChange": true,
+        "HandlerArn": {
+          "Ref": "TestsGetOrderTestCurrentVersion2705E2D1c5f2213f45730c0d6e64049522f9d2f3",
+        },
+        "InvocationType": "RequestResponse",
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWSCDKTriggerCustomResourceProviderCustomResourceProviderHandler97BECD91",
+            "Arn",
+          ],
+        },
+        "Timeout": "120000",
+      },
+      "Type": "Custom::Trigger",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "TestsPostOrderTestCurrentVersion390B109E4024f59419de957764ba65697cc6953e": {
+      "Properties": {
+        "FunctionName": {
+          "Ref": "TestsPostOrderTestEB3C878D",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "TestsPostOrderTestEB3C878D": {
+      "DependsOn": [
+        "TestsPostOrderTestServiceRoleDefaultPolicyB49CCB30",
+        "TestsPostOrderTestServiceRole0D9C5B86",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-bucket",
+          "S3Key": "my-key",
+        },
+        "Environment": {
+          "Variables": {
+            "API_ENDPOINT": "https://api.example.matthewbonig.com/v1/order/",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "TABLE_NAME": {
+              "Fn::ImportValue": "Api:ExportsOutputRefMyTable794EDED1558A264E",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "TestsPostOrderTestServiceRole0D9C5B86",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "TestsPostOrderTestServiceRole0D9C5B86": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "TestsPostOrderTestServiceRoleDefaultPolicyB49CCB30": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:DeleteItem",
+                "dynamodb:Query",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::ImportValue": "Api:ExportsOutputFnGetAttMyTable794EDED1ArnDFAD2254",
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::ImportValue": "Api:ExportsOutputFnGetAttMyTable794EDED1ArnDFAD2254",
+                      },
+                      "/index/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "TestsPostOrderTestServiceRoleDefaultPolicyB49CCB30",
+        "Roles": [
+          {
+            "Ref": "TestsPostOrderTestServiceRole0D9C5B86",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TestsPostOrderTestTrigger4038AF83": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ExecuteOnHandlerChange": true,
+        "HandlerArn": {
+          "Ref": "TestsPostOrderTestCurrentVersion390B109E4024f59419de957764ba65697cc6953e",
+        },
+        "InvocationType": "RequestResponse",
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "AWSCDKTriggerCustomResourceProviderCustomResourceProviderHandler97BECD91",
+            "Arn",
+          ],
+        },
+        "Timeout": "120000",
+      },
+      "Type": "Custom::Trigger",
+      "UpdateReplacePolicy": "Delete",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

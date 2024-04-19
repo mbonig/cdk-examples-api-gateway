@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@aws-lite/dynamodb-types",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },
@@ -21,7 +25,7 @@
     },
     {
       "name": "aws-cdk",
-      "version": "^2.1.0",
+      "version": "^2.134.0",
       "type": "build"
     },
     {
@@ -59,6 +63,10 @@
       "type": "build"
     },
     {
+      "name": "ts-jest-mocker",
+      "type": "build"
+    },
+    {
       "name": "ts-node",
       "type": "build"
     },
@@ -67,8 +75,20 @@
       "type": "build"
     },
     {
+      "name": "@aws-lite/client",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-lite/dynamodb",
+      "type": "runtime"
+    },
+    {
+      "name": "@types/aws-lambda",
+      "type": "runtime"
+    },
+    {
       "name": "aws-cdk-lib",
-      "version": "^2.1.0",
+      "version": "^2.134.0",
       "type": "runtime"
     },
     {

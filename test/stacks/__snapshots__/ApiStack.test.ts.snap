@@ -1,0 +1,596 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot 1`] = `
+{
+  "Outputs": {
+    "BaseApiGatewayURL": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "MyRestApi2D1F47A9",
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region",
+            },
+            ".amazonaws.com/prod/",
+          ],
+        ],
+      },
+    },
+    "CustomURL": {
+      "Value": "https://api.example.matthewbonig.com/v1/",
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "ApiAliasRecordBCE933A3": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "MyRestApiCustomDomain3EE86491",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::GetAtt": [
+              "MyRestApiCustomDomain3EE86491",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "Z008193231WFP7BBYULYK",
+        "Name": "api.example.matthewbonig.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "Certificate4E7ABB08": {
+      "Properties": {
+        "DomainName": "api.example.matthewbonig.com",
+        "DomainValidationOptions": [
+          {
+            "DomainName": "api.example.matthewbonig.com",
+            "HostedZoneId": "Z008193231WFP7BBYULYK",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "test/Certificate",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+    },
+    "Deployment37BBD5E403702306056bac8e3ef6cec63ad8a852": {
+      "DependsOn": [
+        "MyRestApiANY05143F93",
+      ],
+      "Properties": {
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "MyRestApi2D1F47A9": {
+      "Properties": {
+        "Name": "CdkCourseApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "MyRestApiANY05143F93": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": {
+          "Type": "MOCK",
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "MyRestApi2D1F47A9",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "MyRestApiAccount2FB6DB7A": {
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "MyRestApi2D1F47A9",
+      ],
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "MyRestApiCloudWatchRoleD4042E8E",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "MyRestApiCloudWatchRoleD4042E8E": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "MyRestApiCustomDomain3EE86491": {
+      "Properties": {
+        "DomainName": "api.example.matthewbonig.com",
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": {
+          "Ref": "Certificate4E7ABB08",
+        },
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "MyRestApiCustomDomainMaptestMyRestApi2A9F0BDD4FD6466B": {
+      "Properties": {
+        "DomainName": {
+          "Ref": "MyRestApiCustomDomain3EE86491",
+        },
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "MyTable794EDED1": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S",
+          },
+          {
+            "AttributeName": "sk",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH",
+          },
+          {
+            "AttributeName": "sk",
+            "KeyType": "RANGE",
+          },
+        ],
+        "Replicas": [
+          {
+            "Region": {
+              "Ref": "AWS::Region",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::DynamoDB::GlobalTable",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "Prod7A5F3219": {
+      "DependsOn": [
+        "MyRestApiAccount2FB6DB7A",
+      ],
+      "Properties": {
+        "DeploymentId": {
+          "Ref": "Deployment37BBD5E403702306056bac8e3ef6cec63ad8a852",
+        },
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+        "StageName": "v1",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Snapshot with added dependencies 1`] = `
+{
+  "Outputs": {
+    "BaseApiGatewayURL": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "MyRestApi2D1F47A9",
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region",
+            },
+            ".amazonaws.com/prod/",
+          ],
+        ],
+      },
+    },
+    "CustomURL": {
+      "Value": "https://api.example.matthewbonig.com/v1/",
+    },
+    "ExportsOutputFnGetAttMyRestApi2D1F47A9RootResourceIdA8A99F67": {
+      "Export": {
+        "Name": "test:ExportsOutputFnGetAttMyRestApi2D1F47A9RootResourceIdA8A99F67",
+      },
+      "Value": {
+        "Fn::GetAtt": [
+          "MyRestApi2D1F47A9",
+          "RootResourceId",
+        ],
+      },
+    },
+    "ExportsOutputFnGetAttMyTable794EDED1ArnDFAD2254": {
+      "Export": {
+        "Name": "test:ExportsOutputFnGetAttMyTable794EDED1ArnDFAD2254",
+      },
+      "Value": {
+        "Fn::GetAtt": [
+          "MyTable794EDED1",
+          "Arn",
+        ],
+      },
+    },
+    "ExportsOutputRefMyRestApi2D1F47A95DC88B97": {
+      "Export": {
+        "Name": "test:ExportsOutputRefMyRestApi2D1F47A95DC88B97",
+      },
+      "Value": {
+        "Ref": "MyRestApi2D1F47A9",
+      },
+    },
+    "ExportsOutputRefMyTable794EDED1558A264E": {
+      "Export": {
+        "Name": "test:ExportsOutputRefMyTable794EDED1558A264E",
+      },
+      "Value": {
+        "Ref": "MyTable794EDED1",
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "ApiAliasRecordBCE933A3": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "MyRestApiCustomDomain3EE86491",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::GetAtt": [
+              "MyRestApiCustomDomain3EE86491",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "Z008193231WFP7BBYULYK",
+        "Name": "api.example.matthewbonig.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "Certificate4E7ABB08": {
+      "Properties": {
+        "DomainName": "api.example.matthewbonig.com",
+        "DomainValidationOptions": [
+          {
+            "DomainName": "api.example.matthewbonig.com",
+            "HostedZoneId": "Z008193231WFP7BBYULYK",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "test/Certificate",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+    },
+    "Deployment37BBD5E45525ea0a01ac4155b999960e3c29d027": {
+      "DependsOn": [
+        "MyRestApiANY05143F93",
+      ],
+      "Properties": {
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "MyRestApi2D1F47A9": {
+      "Properties": {
+        "Name": "CdkCourseApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "MyRestApiANY05143F93": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": {
+          "Type": "MOCK",
+        },
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "MyRestApi2D1F47A9",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "MyRestApiAccount2FB6DB7A": {
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "MyRestApi2D1F47A9",
+      ],
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "MyRestApiCloudWatchRoleD4042E8E",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "MyRestApiCloudWatchRoleD4042E8E": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "MyRestApiCustomDomain3EE86491": {
+      "Properties": {
+        "DomainName": "api.example.matthewbonig.com",
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": {
+          "Ref": "Certificate4E7ABB08",
+        },
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "MyRestApiCustomDomainMaptestMyRestApi2A9F0BDD4FD6466B": {
+      "Properties": {
+        "DomainName": {
+          "Ref": "MyRestApiCustomDomain3EE86491",
+        },
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "MyTable794EDED1": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S",
+          },
+          {
+            "AttributeName": "sk",
+            "AttributeType": "S",
+          },
+          {
+            "AttributeName": "personId",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "people",
+            "KeySchema": [
+              {
+                "AttributeName": "personId",
+                "KeyType": "HASH",
+              },
+              {
+                "AttributeName": "sk",
+                "KeyType": "RANGE",
+              },
+            ],
+            "Projection": {
+              "ProjectionType": "ALL",
+            },
+          },
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH",
+          },
+          {
+            "AttributeName": "sk",
+            "KeyType": "RANGE",
+          },
+        ],
+        "Replicas": [
+          {
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "people",
+              },
+            ],
+            "Region": {
+              "Ref": "AWS::Region",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::DynamoDB::GlobalTable",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "Prod7A5F3219": {
+      "DependsOn": [
+        "MyRestApiAccount2FB6DB7A",
+      ],
+      "Properties": {
+        "DeploymentId": {
+          "Ref": "Deployment37BBD5E45525ea0a01ac4155b999960e3c29d027",
+        },
+        "RestApiId": {
+          "Ref": "MyRestApi2D1F47A9",
+        },
+        "StageName": "v1",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

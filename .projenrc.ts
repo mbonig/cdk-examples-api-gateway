@@ -1,13 +1,27 @@
 import { awscdk } from 'projen';
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.134.0',
   defaultReleaseBranch: 'main',
   name: 'apigateway',
   projenrcTs: true,
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  deps: [
+    '@types/aws-lambda',
+    '@aws-lite/client',
+    '@aws-lite/dynamodb',
+  ],
+  devDeps: [
+    '@aws-lite/dynamodb-types',
+    'ts-jest-mocker',
+  ],
+  tsconfigDev: {
+    compilerOptions: {
+      types: [
+        '@aws-lite/dynamodb-types',
+        'jest',
+      ],
+      emitDecoratorMetadata: true,
+    },
+  },
 });
 project.synth();

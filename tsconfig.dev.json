@@ -23,7 +23,12 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "ES2019"
+    "target": "ES2019",
+    "types": [
+      "@aws-lite/dynamodb-types",
+      "jest"
+    ],
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src/**/*.ts",
