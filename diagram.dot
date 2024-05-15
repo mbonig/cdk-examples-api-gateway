@@ -1,0 +1,269 @@
+digraph "Diagram" {
+  splines = "ortho";
+  pad = "1.0";
+  nodesep = "0.60";
+  ranksep = "0.75";
+  fontname = "Sans-Serif";
+  fontsize = "15";
+  dpi = "200";
+  rankdir = "BT";
+  compound = "true";
+  fontcolor = "#222222";
+  edge [
+    color = "#D5871488",
+    penwidth = 2,
+    arrowhead = "dot",
+    arrowtail = "dot",
+  ];
+  node [
+    shape = "box",
+    style = "rounded",
+    fixedsize = true,
+    width = 1.7,
+    height = 1.7,
+    labelloc = "c",
+    imagescale = true,
+    fontname = "Sans-Serif",
+    fontsize = 8,
+    margin = 8,
+  ];
+  subgraph "apigateway" {
+    subgraph "cluster-SubGraph.apigateway" {
+      graph [
+        label = "apigateway",
+        labelloc = "b",
+        labeljust = "l",
+        margin = "10",
+        fontsize = "16",
+        penwidth = "2",
+        pencolor = "#888888",
+        style = "filled,rounded",
+        fillcolor = "#e4e4e4",
+      ];
+      subgraph "cluster-SubGraph.Api" {
+        graph [
+          label = "Api",
+          labelloc = "b",
+          labeljust = "l",
+          margin = "10",
+          fontsize = "16",
+          penwidth = "2",
+          pencolor = "#888888",
+          style = "filled,rounded",
+          fillcolor = "#d6d6d6",
+        ];
+        "apigateway/Api/Certificate" [
+          label = " Certificate",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Certificate-Manager_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "apigateway/Api/MyRestApi" [
+          label = " MyRestApi",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "apigateway/Api/ApiAliasRecord" [
+          label = " ApiAliasRecord",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Resource/Res_Networking-and-Content-Delivery/Res_48_Dark/Res_Amazon-Route-53-Hosted-Zone_48_Dark_gen.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "apigateway/Api/Deployment" [
+          label = " Deployment",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "apigateway/Api/Prod" [
+          label = " Prod",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "apigateway/Api/MyTable" [
+          label = " MyTable",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Database/64/Arch_Amazon-DynamoDB_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+      }
+      subgraph "cluster-SubGraph.Person" {
+        graph [
+          label = "Person",
+          labelloc = "b",
+          labeljust = "l",
+          margin = "10",
+          fontsize = "16",
+          penwidth = "2",
+          pencolor = "#888888",
+          style = "filled,rounded",
+          fillcolor = "#d6d6d6",
+        ];
+        "apigateway/Person/GetPersonHandler" [
+          label = " GetPersonHandler",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 2,
+          height = 2.266,
+        ];
+        "apigateway/Person/RestApi/Default/person" [
+          label = " person",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+      }
+      subgraph "cluster-SubGraph.Order" {
+        graph [
+          label = "Order",
+          labelloc = "b",
+          labeljust = "l",
+          margin = "10",
+          fontsize = "16",
+          penwidth = "2",
+          pencolor = "#888888",
+          style = "filled,rounded",
+          fillcolor = "#d6d6d6",
+        ];
+        "apigateway/Order/GetOrderHandler" [
+          label = " GetOrderHandler",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 2,
+          height = 2.266,
+        ];
+        "apigateway/Order/PostOrderHandler" [
+          label = " PostOrderHandler",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 2,
+          height = 2.266,
+        ];
+        "apigateway/Order/RestApi/Default/order" [
+          label = " order",
+          fontsize = 12,
+          image = "/Users/matthewbonig/.npm/_npx/b98735c91b702b55/node_modules/cdk-dia/icons/aws/Service/Arch_Networking-Content/64/Arch_Amazon-API-Gateway_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        subgraph "cluster-SubGraph.Tests" {
+          graph [
+            label = "Tests",
+            labelloc = "b",
+            labeljust = "l",
+            margin = "10",
+            fontsize = "16",
+            penwidth = "2",
+            pencolor = "#888888",
+            style = "filled,rounded",
+            fillcolor = "#c7c7c7",
+          ];
+          "apigateway/Order/Tests/GetOrderTest" [
+            label = " GetOrderTest",
+            fontsize = 12,
+          ];
+          "apigateway/Order/Tests/PostOrderTest" [
+            label = " PostOrderTest",
+            fontsize = 12,
+          ];
+        }
+      }
+    }
+  }
+  "apigateway/Api/MyRestApi" -> "apigateway/Api/Certificate" [
+    dir = "both",
+  ];
+  "apigateway/Api/ApiAliasRecord" -> "apigateway/Api/MyRestApi" [
+    dir = "both",
+  ];
+  "apigateway/Api/Deployment" -> "apigateway/Api/MyRestApi" [
+    dir = "both",
+  ];
+  "apigateway/Api/Prod" -> "apigateway/Api/MyRestApi" [
+    dir = "both",
+  ];
+  "apigateway/Person/RestApi/Default/person" -> "apigateway/Person/GetPersonHandler" [
+    dir = "both",
+  ];
+  "apigateway/Order/RestApi/Default/order" -> "apigateway/Order/GetOrderHandler" [
+    dir = "both",
+  ];
+  "apigateway/Order/RestApi/Default/order" -> "apigateway/Order/PostOrderHandler" [
+    dir = "both",
+  ];
+}

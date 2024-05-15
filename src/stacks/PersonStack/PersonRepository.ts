@@ -16,7 +16,7 @@ export class PersonRepository implements IPersonRepository {
     let people = await this.databaseAdapter.getAll(this.indexName);
 
     return people.map((person: TableModel) => ({
-      id: person.sk,
+      personId: person.sk,
       firstName: person.firstName,
       lastName: person.lastName,
     }));

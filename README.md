@@ -5,11 +5,13 @@ The goal of this example is to show how to separate CDK stacks so that different
 
 ## Architecture
 
+![Architecture](./diagram.png)
+
 This example consists of three stacks (in one stage):
 
-1. `ApiStack` (Base API) - This stack creates an API Gateway RestApi resource and DynamoDB table that is to be shared across different resources (a single table design pattern). It also creates a Route53 record for better access to the API.
-2. `OrderStack` (Order API) - This stack creates an 'Order' resource on the API, as well as the POST and GET methods for that resource. It also creates a GSI on the table that is specific to the 'Order' resource.
-3. `PersonStack` (Person API) - This stack creates a 'Person' resource on the API, as well as two GET methods for that resource. It also creates a GSI on the table that is specific to the 'Person' resource.
+1. [ApiStack](./src/stacks/ApiStack.ts) (Base API) - This stack creates an API Gateway RestApi resource and DynamoDB table that is to be shared across different resources (a single table design pattern). It also creates a Route53 record for better access to the API.
+2. [OrderStack](./src/stacks/OrderStack/OrderStack.ts) (Order API) - This stack creates an 'Order' resource on the API, as well as the POST and GET methods for that resource. It also creates a GSI on the table that is specific to the 'Order' resource.
+3. [PersonStack](./src/stacks/PersonStack/PersonStack.ts) (Person API) - This stack creates a 'Person' resource on the API, as well as two GET methods for that resource. It also creates a GSI on the table that is specific to the 'Person' resource.
 
 In this case, the work on the Order resource and Person resource can be entirely independent of each other.
 

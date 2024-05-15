@@ -53,12 +53,12 @@ describe('PersonRepository', () => {
       const people = await personRepository.getAll();
 
       expect(people[0]).toEqual({
-        id: 'person-Doe-John',
+        personId: 'person-Doe-John',
         firstName: 'John',
         lastName: 'Doe',
       });
       expect(people[1]).toEqual({
-        id: 'person-Doe-Jane',
+        personId: 'person-Doe-Jane',
         firstName: 'Jane',
         lastName: 'Doe',
       });

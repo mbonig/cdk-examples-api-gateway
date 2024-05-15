@@ -18,14 +18,13 @@ export const handler = async (event: APIGatewayEvent) => {
       indexName,
     ),
   );
-
   if (!event.body) {
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Missing request body' }),
     };
   }
-  const newOrder = await orderApplication.save( JSON.parse(event.body!) as Order);
+  const newOrder = await orderApplication.save(JSON.parse(event.body!) as Order);
   return {
     statusCode: 200,
     body: JSON.stringify(newOrder),

@@ -29,7 +29,9 @@ afterAll(() => {
 
 test('Snapshot', () => {
   const app = new App();
-  const { api, table } = new ApiStack(app, 'Api', {});
+  const { api, table } = new ApiStack(app, 'Api', {
+    hostedZoneId: 'ABCD0000111',
+  });
   const stack = new OrderStack(app, 'test', {
     api: api,
     table: table,

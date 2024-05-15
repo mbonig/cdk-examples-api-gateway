@@ -3,7 +3,7 @@ import { ApiStage } from './stages/ApiStage';
 
 const app = new App();
 
-new ApiStage(app, 'apigateway', {
+new ApiStage(app, 'CDK-Example-API-Gateway', {
   env: {
     account: '012345678901',
     region: 'us-east-1',

@@ -6,7 +6,9 @@ import { PersonStack } from '../../src/stacks/PersonStack';
 
 test('Snapshot', () => {
   const app = new App();
-  const stack = new ApiStack(app, 'test');
+  const stack = new ApiStack(app, 'test', {
+    hostedZoneId: 'Z008193231WFP7BBYULYK',
+  });
 
   const template = Template.fromStack(stack);
   expect(template.toJSON()).toMatchSnapshot();
@@ -14,7 +16,9 @@ test('Snapshot', () => {
 
 test('Snapshot with added dependencies', () => {
   const app = new App();
-  const stack = new ApiStack(app, 'test');
+  const stack = new ApiStack(app, 'test', {
+    hostedZoneId: 'Z008193231WFP7BBYULYK',
+  });
   const personStack = new PersonStack(stack, 'Person', { api: stack.api, table: stack.table });
   stack.addToDeployment(personStack.deploymentDependencies);
   const template = Template.fromStack(stack);
